@@ -1,0 +1,51 @@
+{% extends "app/base.html" %}
+{% block content %}
+        <div class="main-wrap">
+            <div class="container">
+                <div class="row">
+                    <!-- タイトル -->
+                    <div class="col-12">
+                        <h2>RESERVE</h2>
+                    </div>
+
+                    <!-- サロン詳細 -->
+                    <div class="col-12">
+                        <div class="card">
+                            <img src="/{{ salon.img.url }}" alt="" class="card-img-top">
+                            <div class="card-body">
+                                <div class="">
+                                    <h3>{{ salon_data.name }}店</h3>
+                                    <hr>
+                                    <p>住所：{{ salon_data.address }}</p>
+                                    <p>{{ salon_data.description|linebreaksbr }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- スタイリスト選択画面 -->
+                    <div class="col-12">
+                        <div>
+                            <h4>スタイリスト選択画面</h4>
+                        </div>
+                        <div>
+                            {% for stylist in stylist_data %}
+                            <div class="card">
+                                <img src="/{{ stylist.user.image.url }}" alt="" class="card-img-top">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ stylist.user.name }}</h5>
+                                    <h6 class="card-subtitle">{{ stylist.user.furigana }}</h6>
+                                    <h6 class="card-subtitle">{{ stylist.user.position }}</h6>
+                                    <p class="card-text">
+                                        {{ stylist.user.description }}
+                                    </p>
+                                    <a href="{% url 'calendar' stylist.pk %}" class="btn btn-secondary">予約</a>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "app/base.html" %}
+{% block content %}
+        <div class="main-wrap">
+            <div class="container">
+                <div class="row">
+                    <!-- タイトル -->
+                    <div class="col-12">
+                        <h2>RESERVE</h2>
+                    </div>
+
+                    <!-- スタイリスト選択画面 -->
+                    <div class="col-12">
+                        <div>
+                            <h4>サロン選択画面</h4>
+                        </div>
+                        <div>
+                            {% for salon in salon_data %}
+                            <div class="card">
+                                <img src="/{{ salon.image.url }}" alt="" class="card-img-top">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ salon.name }}</h5>
+                                    <h6 class="card-subtitle">{{ salon.address }}</h6>
+                                    <p class="card-text">
+                                        {{ salon.description|linebreaksbr }}
+                                    </p>
+                                    <a href="{% url 'stylist_choice' salon.pk %}" class="btn btn-secondary">予約</a>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}

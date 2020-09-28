@@ -44,9 +44,9 @@
                         <a class="nav-link" href="">News</a>
                     </li> -->
                     {% if user.is_authenticated %}
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" href="">Reserve</a>
-                    </li> -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'salon_choice' %}">Reserve</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'profile' %}">Mypage</a>
                     </li>
