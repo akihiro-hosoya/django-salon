@@ -21,7 +21,6 @@ class LogoutView(views.LogoutView):
             self.logout()
         return redirect('/')
 
-
 class ProfileView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         user_data = CustomUser.objects.get(id=request.user.id)
@@ -36,23 +35,27 @@ class ProfileEditView(LoginRequiredMixin, View):
         form = ProfileForm(
             request.POST or None,
             initial={
-                'first_name': user_data.first_name,
-                'last_name': user_data.last_name,
-                'department': user_data.department
+                'image': user_data.image,
+                'name': user_data.name,
+                'furigana': user_data.furigana,
+                'description': user_data.description,
             }
         )
 
         return render(request, 'accounts/profile_edit.html', {
-            'form': form
+            'form': form,
+            'user_data': user_data
         })
 
     def post(self, request, *args, **kwargs):
         form = ProfileForm(request.POST or None)
         if form.is_valid():
             user_data = CustomUser.objects.get(id=request.user.id)
-            user_data.first_name = form.cleaned_data['first_name']
-            user_data.last_name = form.cleaned_data['last_name']
-            user_data.department = form.cleaned_data['department']
+            user_data.name = form.cleaned_data['name']
+            user_data.furigana = form.cleaned_data['furigana']
+            user_data.description = form.cleaned_data['description']
+            if request.FILES.get('image'):
+                user_data.image = request.FILES.get('image')
             user_data.save()
             return redirect('profile')
 

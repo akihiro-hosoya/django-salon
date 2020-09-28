@@ -8,19 +8,35 @@
         <table class="profile_table mb-4">
             <tbody>
                 <tr>
+                    <th class="header">プロフィール画像</th>
+                    <td class="data">
+                        {% if user_data.image %}
+                            <img src="/{{ user_data.image.url }}" width=100px alt="">
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
                     <th class="header">名前</th>
-                    <td class="data">{{ user_data.first_name }} {{ user_data.last_name }}</td>
+                    <td class="data">{{ user_data.name }}</td>
+                </tr>
+                <tr>
+                    <th class="header">フリガナ</th>
+                    <td class="data">{{ user_data.furigana }}</td>
                 </tr>
                 <tr>
                     <th class="header">メールアドレス</th>
                     <td class="data">{{ user_data.email }}</td>
                 </tr>
                 <tr>
-                    <th class="header">所属</th>
-                    <td class="data">{{ user_data.department }}</td>
+                    <th class="header">役職</th>
+                    <td class="data">{{ user_data.position }}</td>
                 </tr>
                 <tr>
-                    <th class="header">入会日</th>
+                    <th class="header">自己紹介</th>
+                    <td class="data">{{ user_data.description }}</td>
+                </tr>
+                <tr>
+                    <th class="header"> 勤務開始日</th>
                     <td class="data">{{ user_data.created }}</td>
                 </tr>
             </tbody>

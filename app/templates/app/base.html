@@ -6,51 +6,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <title>カスタム認証チュートリアル</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+        integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>予約サイト</title>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg">
         <div class="container">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="/">ホーム</a>
-                </li>
-                {% if user.is_authenticated %}
+            <div class="row">
+                <a class="col-8" href="/" class="navbar-bramd">
+                    <span>Design</span>
+                </a>
+                <div class="col-4">
+                    <div class="d-flex justify-content-end mr-3">
+                        <div>
+                            <span><i class="fas fa-phone-volume"></i> xxx-xxxx-xxxx</span>
+                            <p style="font-size: 0.5rem;">営業時間：10:00〜20:00<br>定休日：火曜日</p>    
+                        </div>
+                        <div class="ml-2 d-flex flex-column">
+                            <a href="">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="">
+                                <i class="fab fa-twitter"></i>
+                            </a>    
+                        </div>
+                    </div>
+                </div>
+                <ul class="navbar-nav ml-auto nav-menu">
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'profile' %}">プロフィール</a>
+                        <a class="nav-link" href="/">Top</a>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="">News</a>
+                    </li> -->
+                    {% if user.is_authenticated %}
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="">Reserve</a>
+                    </li> -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'profile' %}">Mypage</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'account_logout' %}">ログアウト</a>
                     </li>
-                {% else %}
+                    {% else %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'account_signup' %}">サインアップ</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'account_login' %}">ログイン</a>
                     </li>
-                {% endif %}
-            </ul>
+                    {% endif %}
+                </ul>
+            </div>
         </div>
     </nav>
 
     <main>
-        <div class="container">
-            {% block content %}
-            {% endblock %}
-        </div>
+        {% block content %}
+        {% endblock %}
     </main>
 
     <footer class="py-2 bg-dark">
-        <p class="m-0 text-center text-white">Copyright &copy; Django Startup 2020</p>
+        <p class="m-0 text-center text-white">Copyright &copy; Django 2020</p>
     </footer>
 
-    {% block extra_js %}
-    {% endblock %}
-
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script></body>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
+        integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
+        crossorigin="anonymous"></script>
+</body>
 
 </html>

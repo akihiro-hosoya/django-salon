@@ -31,10 +31,12 @@ class UserManager(UserManager):
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField('メールアドレス', unique=True)
-    first_name = models.CharField(('姓'), max_length=30)
-    last_name = models.CharField(('名'), max_length=30)
-    department = models.CharField(('所属'), max_length=30, blank=True)
-    created = models.DateTimeField(('入会日'), default=timezone.now)
+    name = models.CharField(('名前'), max_length=30)
+    furigana = models.CharField(('フリガナ'), max_length=30)
+    position = models.CharField(('役職'), max_length=30, blank=True)
+    description = models.TextField('自己紹介', default="", blank=True)
+    image = models.ImageField(upload_to='images', verbose_name='プロフィール画像', null=True, blank=True)
+    created = models.DateTimeField(('勤務開始日'), default=timezone.now)
 
     is_staff = models.BooleanField(
         ('staff status'),
@@ -57,8 +59,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = []
 
     class Meta:
-        verbose_name = ('user')
-        verbose_name_plural = ('users')
+        verbose_name = ('stylist')
+        verbose_name_plural = ('stylists')
 
     def clean(self):
         super().clean()

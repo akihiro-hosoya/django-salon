@@ -1,9 +1,146 @@
 {% extends "app/base.html" %}
-
 {% block content %}
 
-<div class="my-5">
-    <h1>Hello World!!</h1>
-</div>
 
+<div class="main-wrap">
+    <div class="container">
+        <div class="row">
+            <!-- カルーセル -->
+            <div class="carousel slide" data-ride="carousel" id="top-carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#top-carousel" data-slide-to="0"></li>
+                </ol>
+                <ol class="carousel-indicators">
+                    <li data-target="#top-carousel" data-slide-to="1"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img class="d-block w-100" src="/images/blake-wisz-GFrBMipOd_E-unsplash.jpg" alt="First-slide">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="/images/blake-wisz-GFrBMipOd_E-unsplash.jpg" alt="First-slide">
+                    </div>
+                </div>
+            </div>
+
+            <!-- About -->
+            <div class="col-12 my-5">
+                <h5 class="text-center">ABOUT</h5>
+                <div class="row d-flex justify-content-center">
+                    <!-- 写真 -->
+                    <div class="col-12 col-md-6 px-0">
+                        <img class="img-fluid" src="/images/blake-wisz-GFrBMipOd_E-unsplash.jpg" alt="">
+                    </div>
+                    <!-- コンセプト紹介 -->
+                    <div class="col-12 col-md-5 px-0 border">
+                        <div class="">
+                            <p>あなたにあったヘアスタイルをご提案します。</p>
+                            <div class="btn btn-outline-secondary">
+                                <p>more</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- News -->
+            <!-- <div class="col-12 mb-5">
+                <h5 class="text-center">NEWS</h5>
+                <div class="border border-secondary p-5">
+                    {% for news in news_data %}
+                    <ul>
+                        <li>
+                            <a href="{% url 'news_detail'　news.id %}">
+                                <p>{{ news.created_date|date:"Y/m/d f" }}：{{ news.title }}</p>
+                            </a>
+                        </li>
+                    </ul>
+                    {% endfor %}
+                </div>
+            </div> -->
+
+            <!-- スタイリスト -->
+            <div class="col-12 mb-5">
+                <h5 class="text-center">STYLISTS</h5>
+                <div class="border border-secondary p-3">
+                    <div class="row">
+                        <div class="col-12">
+                            <p>トップスタイリスト</p>
+                        </div>
+                        <div class="col-9">
+                            <div class="row">
+                                <div class="col-3">
+                                    <div class="card">
+                                        <img src="/images/christian-buehner-DItYlc26zVI-unsplash.jpg" alt=""
+                                            class="card-img-top">
+                                        <div class="card-body">
+                                            <p class="card-text">スタイリスト名</p>
+                                        </div>
+                                        <a href="" class="stretched-link"></a>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="card">
+                                        <img src="/images/christian-buehner-DItYlc26zVI-unsplash.jpg" alt=""
+                                            class="card-img-top">
+                                        <div class="card-body">
+                                            <p class="card-text">スタイリスト名</p>
+                                        </div>
+                                        <a href="" class="stretched-link"></a>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="card">
+                                        <img src="/images/christian-buehner-DItYlc26zVI-unsplash.jpg" alt=""
+                                            class="card-img-top">
+                                        <div class="card-body">
+                                            <p class="card-text">スタイリスト名</p>
+                                        </div>
+                                        <a href="" class="stretched-link"></a>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="card">
+                                        <img src="/images/christian-buehner-DItYlc26zVI-unsplash.jpg" alt=""
+                                            class="card-img-top">
+                                        <div class="card-body">
+                                            <p class="card-text">スタイリスト名</p>
+                                        </div>
+                                        <a href="" class="stretched-link"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3 my-2">
+                            <button class="btn btn-outline-secondary">
+                                <a href="">スタイリスト一覧を見る</a>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- About -->
+            <div class="col-12 my-5">
+                <h5 class="text-center">SHOP</h5>
+                <div class="row d-flex justify-content-center">
+                    <!-- 写真 -->
+                    <div class="col-12 col-md-6 px-0">
+                        <img class="img-fluid" src="/images/blake-wisz-GFrBMipOd_E-unsplash.jpg" alt="">
+                    </div>
+                    <!-- コンセプト紹介 -->
+                    <div class="col-12 col-md-5 px-0 border">
+                        <div class="">
+                            <p>当サロンで販売中の人気商品をご購入いただけます。</p>
+                            <div class="btn btn-outline-secondary">
+                                <p>shopへ</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
 {% endblock %}

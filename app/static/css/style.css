@@ -5,7 +5,7 @@
 }
 
 body {
-    background: #F1F1F1;
+    background: #fff;
     display: flex;
     flex-flow: column;
     min-height: 100vh;
@@ -15,11 +15,24 @@ main {
     flex: 1;
 }
 
+/* ナビゲーション */
+.navbar {
+    border-bottom: 1px solid #000;
+}
+.nav-menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+
+
+
+
 .card-profile {
     width: 700px;
     border: 0;
     border-radius: 1rem;
-    box-shadow: 0 0.2rem 0.2rem 0 rgba(0, 0, 0, 0.1);
 }
 
 .button {
@@ -35,7 +48,6 @@ main {
 .profile_table {
     width: 100%;
     border: 1px solid #D1DBEB;
-    border-radius: 8px;
     border-collapse: separate;
     overflow: hidden;
 }
