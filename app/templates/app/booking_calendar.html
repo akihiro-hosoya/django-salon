@@ -38,9 +38,20 @@
                     {% for datetime, book in booking_date.items %}
                     <td>
                         {% if book == "" %}
-                            出勤
+                            <form method="POST" action="#">
+                                {% csrf_token %}
+                                <button class="btn btn-light" type="submit">出勤</button>
+                            </form>
                         {% else %}
-                            <p class="mb-0 font-weight-bold text-success">{{ book }}様</p>
+                            {% if book == None %}
+                                <p class="mb-0">休み</p>
+                            {% else %}
+                                <p class="mb-0 font-weight-bold text-success">{{ book }}様</p>
+                            {% endif %}
+                            <form method="POST" action="{% url 'delete' datetime.year datetime.month datetime.day booking_hour %}">
+                                {% csrf_token %}
+                                <button class="btn btn-danger" type="submit">取消</button>
+                            </form>
                         {% endif %}
                     </td>
                     {% endfor %}
@@ -51,9 +62,11 @@
     </div>
 
     <div class="row">
-        <div class="col-md-3 mb-4 text-center">
+        <div class="col-md-3 text-center mypage">
+            {% if stylist_data.image %}
             <img class="mb-3" src="/{{ stylist_data.user.image.url }}" class="img-fluid" alt="">
-            <p>{{ stylist_data.salon.name }}店：{{ stylist_data.user.name }} {{ staff_data.user.furigana }}</p>
+            {% endif %}
+            <p>{{ stylist_data.salon.name }}店：{{ stylist_data.user.name }} {{ stylist_data.user.position }}</p>
         </div>
 
         <div class="col-md-9">
@@ -74,7 +87,7 @@
                                 {% for booking in booking_data %}
                                     {% if booking.name != None %}
                                         <tr>
-                                            <td>{{ booking.first_name }} {{ booking.last_name }}様</td>
+                                            <td>{{ booking.name }}様</td>
                                             <td>{{ booking.start }}</td>
                                             <td>{{ booking.end }}</td>
                                         </tr>

@@ -11,7 +11,9 @@
                     <!-- スタイリスト詳細 -->
                     <div class="col-12">
                         <div class="card">
+                            {% if stylist_data.user.image %}
                             <img src="/{{ stylist_data.user.image.url }}" alt="" class="card-img-top">
+                            {% endif %}
                             <div class="card-body">
                                 <div class="">
                                     <h3 class="card-title">{{ stylist_data.user.name }}</h3>

@@ -144,7 +144,8 @@ class ThanksView(TemplateView):
 
 class BookingCalendarView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
-        stylist_data = Stylist.objects.filter(id=request.user.id).select_related('user').select_related('salon')[0]
+        stylist_data = Stylist.objects.get(id=request.user.id)
+        print(stylist_data)
         year = self.kwargs.get('year')
         month = self.kwargs.get('month')
         day = self.kwargs.get('day')

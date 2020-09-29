@@ -11,7 +11,9 @@
                     <!-- サロン詳細 -->
                     <div class="col-12">
                         <div class="card">
+                            {% if salon.image %}
                             <img src="/{{ salon.img.url }}" alt="" class="card-img-top">
+                            {% endif %}
                             <div class="card-body">
                                 <div class="">
                                     <h3>{{ salon_data.name }}店</h3>
@@ -31,7 +33,9 @@
                         <div>
                             {% for stylist in stylist_data %}
                             <div class="card">
+                                {% if stylist.image %}
                                 <img src="/{{ stylist.user.image.url }}" alt="" class="card-img-top">
+                                {% endif %}
                                 <div class="card-body">
                                     <h5 class="card-title">{{ stylist.user.name }}</h5>
                                     <h6 class="card-subtitle">{{ stylist.user.furigana }}</h6>
