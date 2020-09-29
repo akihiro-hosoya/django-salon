@@ -4,6 +4,8 @@ from django.utils import timezone
 from django.urls import reverse
 
 # Create your models here.
+
+# 予約サイト
 class Salon(models.Model):
     name = models.CharField('店舗', max_length=100)
     address = models.CharField('住所', max_length=100, null=True, blank=True)
@@ -34,3 +36,17 @@ class Booking(models.Model):
         start = timezone.localtime(self.start).strftime('%Y/%m/%d %H:%M')
         end = timezone.localtime(self.end).strftime('%Y/%m/%d %H:%M')
         return f'{self.name} {start} ~ {end} {self.stylist}'
+
+
+# News
+class News(models.Model):
+    title = models.CharField(max_length=100)
+    content = models.TextField()
+    created_date = models.DateTimeField(default=timezone.now)
+    image = models.ImageField(upload_to='images', verbose_name='画像', null=True, blank=True)
+
+    def get_absolute_url(self):
+        return reverse('news_detail', kwargs={'pk':self.pk})
+
+    def __str__(self):
+        return self.title

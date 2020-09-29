@@ -1,0 +1,27 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="row main_wrap">
+    <div class="col-12">
+        <!-- ---------- 最新情報一覧 ---------- -->
+        <div class="">
+            <h2 class="text-center">NEWS一覧</h2>
+            <div class="medium">
+                {% for news in news_data %}
+                <div class="media">
+                    <div class="media-body bg-white">
+                        <h5><a class="text-info font-weight-bold"
+                                href="{% url 'news_detail' news.id %}">{{ news.title }}</a></h5>
+                        <p>{{ news.content|linebreaksbr|truncatechars:100 }}</p>
+                        <div class="media-detail">
+                            <p>{{ news.created_date }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

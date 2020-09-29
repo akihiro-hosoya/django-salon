@@ -4,8 +4,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.timezone import localtime, make_aware
 from datetime import datetime, date, timedelta, time
 from django.db.models import Q
-from app.models import Salon, Stylist, Booking
+from app.models import Salon, Stylist, Booking, News
 from app.forms import BookingForm
+from django.views.decorators.http import require_POST
 
 # Create your views here.
 class IndexView(TemplateView):
@@ -144,8 +145,7 @@ class ThanksView(TemplateView):
 
 class BookingCalendarView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
-        stylist_data = Stylist.objects.get(id=request.user.id)
-        print(stylist_data)
+        stylist_data = Stylist.objects.get(user=request.user)
         year = self.kwargs.get('year')
         month = self.kwargs.get('month')
         day = self.kwargs.get('day')
@@ -169,7 +169,7 @@ class BookingCalendarView(LoginRequiredMixin, View):
             booking_date = local_time.date()
             booking_hour = local_time.hour
             if (booking_hour in calendar) and (booking_date in calendar[booking_hour]):
-                calendar[booking_hour][booking_date] = booking.first_name
+                calendar[booking_hour][booking_date] = booking.name
 
         return render(request, 'app/booking_calendar.html', {
             'stylist_data': stylist_data,
@@ -183,4 +183,53 @@ class BookingCalendarView(LoginRequiredMixin, View):
             'year': year,
             'month': month,
             'day': day,
+        })
+
+@require_POST
+def Holiday(request, year, month, day, hour):
+    stylist_data = Stylist.objects.get(user=request.user)
+    start_time = make_aware(datetime(year=year, month=month, day=day, hour=hour))
+    end_time = make_aware(datetime(year=year, month=month, day=day, hour=hour + 1))
+
+    Booking.objects.create(
+        stylist=stylist_data,
+        start=start_time,
+        end=end_time,
+    )
+
+    start_date = date(year=year, month=month, day=day)
+    weekday = start_date.weekday()
+    if weekday != 6:
+        start_date = start_date - timedelta(days=weekday + 1)
+    return redirect('booking_calendar', year=start_date.year, month=start_date.month, day=start_date.day)
+
+@require_POST
+def Delete(request, year, month, day, hour):
+    start_time = make_aware(datetime(year=year, month=month, day=day, hour=hour))
+    booking_data = Booking.objects.filter(start=start_time)
+
+    booking_data.delete()
+
+    start_date = date(year=year, month=month, day=day)
+    weekday = start_date.weekday()
+    if weekday != 6:
+        start_date = start_date - timedelta(days=weekday + 1)
+    return redirect('booking_calendar', year=start_date.year, month=start_date.month, day=start_date.day)
+
+
+# News
+class NewsListView(View):
+    def get(self, request, *args, **kwargs):
+        news_data = News.objects.order_by('-id')
+
+        return render(request, 'app/news_list.html', {
+            'news_data': news_data,
+        })
+
+class NewsDetailView(View):
+    def get(self, request, *args, **kwargs):
+        news_data = News.objects.get(id=self.kwargs['pk'])
+
+        return render(request, 'app/news_detail.html', {
+            'news_data': news_data,
         })

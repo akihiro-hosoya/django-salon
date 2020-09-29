@@ -10,4 +10,9 @@ urlpatterns = [
     path('calendar/<int:pk>/<int:year>/<int:month>/<int:day>/<int:hour>/', views.BookingView.as_view(), name='booking'),
     path('thanks/', views.ThanksView.as_view(), name='thanks'),
     path('booking/calendar/<int:year>/<int:month>/<int:day>/', views.BookingCalendarView.as_view(), name='booking_calendar'),
+    path('mypage/holiday/<int:year>/<int:month>/<int:day>/<int:hour>/', views.Holiday, name='holiday'),
+    path('mypage/delete/<int:year>/<int:month>/<int:day>/<int:hour>/', views.Delete, name='delete'),
+    # News
+    path('news/', views.NewsListView.as_view(), name='news_list'),
+    path('news/<int:pk>', views.NewsDetailView.as_view(), name='news_detail'),
 ]
