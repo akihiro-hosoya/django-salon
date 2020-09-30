@@ -4,7 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.timezone import localtime, make_aware
 from datetime import datetime, date, timedelta, time
 from django.db.models import Q
-from app.models import Salon, Stylist, Booking, News
+from app.models import Salon, Stylist, Booking, News, StyleCategory, Style
 from app.forms import BookingForm
 from django.views.decorators.http import require_POST
 
@@ -216,6 +216,9 @@ def Delete(request, year, month, day, hour):
         start_date = start_date - timedelta(days=weekday + 1)
     return redirect('booking_calendar', year=start_date.year, month=start_date.month, day=start_date.day)
 
+# About
+class AboutView(TemplateView):
+    template_name = 'app/about.html'
 
 # News
 class NewsListView(View):
@@ -233,3 +236,45 @@ class NewsDetailView(View):
         return render(request, 'app/news_detail.html', {
             'news_data': news_data,
         })
+
+class StylistListView(View):
+    def get(self, request, *args, **kwargs):
+        stylist_data = Stylist.objects.order_by('-id')
+
+        return render(request, 'app/stylist_list.html', {
+            'stylist_data': stylist_data,
+        })
+
+class StylistDetailView(View):
+    def get(self, request, *args, **kwargs):
+        stylist_data = Stylist.objects.get(id=self.kwargs['pk'])
+
+        return render(request, 'app/stylist_detail.html', {
+            'stylist_data': stylist_data,
+        })
+
+class StyleListView(View):
+    def get(self, request, *args, **kwargs):
+        style_category = StyleCategory.objects.all()
+        style_data = Style.objects.order_by('id')
+
+        return render(request, 'app/style_list.html', {
+            'style_category': style_category,
+            'style_data': style_data,
+        })
+
+class StyleDetailView(View):
+    def get(self, request, *args, **kwargs):
+        style_data = Style.objects.get(id=self.kwargs['pk'])
+
+        return render(request, 'app/style_detail.html', {
+            'style_data': style_data,
+        })
+
+# class MenuView(View):
+#     def get(self, request, *args, **kwargs):
+#         menu_data = Menu.objects.order_by('id')
+
+#         return render(request, 'app/menu.html', {
+#             'menu': menu,
+#         })

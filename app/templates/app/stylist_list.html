@@ -1,0 +1,26 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="row main_wrap">
+    <div class="col-12">
+        <!-- ---------- スタイリスト一覧 ---------- -->
+        <div class="">
+            <h2 class="text-center">スタイリスト一覧</h2>
+            <div class="medium">
+                {% for stylist in stylist_data %}
+                <div class="media">
+                    <div class="media-body bg-white">
+                        <h5>
+                            <a class="text-info font-weight-bold" href="{% url 'stylist_detail' stylist.id %}">{{ stylist.user.name }}</a>
+                        </h5>
+                        <p>{{ stylist.user.position }}</p>
+                        <p>{{ stylist.user.description|linebreaksbr|truncatechars:100 }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

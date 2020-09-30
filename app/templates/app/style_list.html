@@ -1,0 +1,26 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="row main_wrap">
+    <div class="col-12">
+        <!-- ---------- スタイル一覧 ---------- -->
+        <div class="">
+            <h2 class="text-center">スタイル一覧</h2>
+            <div class="medium">
+                {% for style in style_data %}
+                <div class="media">
+                    <div class="media-body bg-white">
+                        <h5>
+                            <a class="text-info font-weight-bold" href="{% url 'style_detail' style.id %}">{{ style.name }}</a>
+                        </h5>
+                        <p>{{ style.stylist.name }}</p>
+                        <p>{{ style.category.name }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

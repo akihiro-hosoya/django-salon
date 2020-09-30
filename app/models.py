@@ -50,3 +50,35 @@ class News(models.Model):
 
     def __str__(self):
         return self.title
+
+# Style一覧
+class StyleCategory(models.Model):
+    name = models.CharField('カテゴリー', max_length=50)
+
+    def __str__(self):
+        return self.name
+
+class Style(models.Model):
+    category = models.ForeignKey(StyleCategory, verbose_name='スタイルカテゴリ', on_delete=models.CASCADE)
+    name = models.CharField(max_length=50)
+    detail = models.TextField()
+    stylist = models.ForeignKey(Stylist, verbose_name='スタイリスト', on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='images', verbose_name='画像', null=True, blank=True)
+
+    def __str__(self):
+        return self.name
+
+class MenuCategory(models.Model):
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
+
+class Menu(models.Model):
+    title = models.CharField(max_length=100)
+    price = models.IntegerField()
+    category = models.ForeignKey(MenuCategory, verbose_name='メニュカテゴリー', on_delete=models.CASCADE)
+    description = models.TextField()
+
+    def __str__(self):
+        return self.title

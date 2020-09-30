@@ -1,0 +1,22 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="row main_wrap">
+    <div class="col-12">
+        <!-- ---------- スタイリスト詳細 ---------- -->
+        <div class="">
+            <h2 class="text-center">スタイリスト</h2>
+            <div class="medium">
+                <div class="media">
+                    <div class="media-body bg-white">
+                        <h5>{{ style_data.name }}</h5>
+                        <p>{{ style_data.detail }}</p>
+                        <p>{{ style_data.stylist.name }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
