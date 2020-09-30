@@ -4,7 +4,6 @@ from django.utils import timezone
 from django.urls import reverse
 
 # Create your models here.
-
 # 予約サイト
 class Salon(models.Model):
     name = models.CharField('店舗', max_length=100)

@@ -32,7 +32,6 @@ main {
 .card-profile {
     width: 700px;
     border: 0;
-    border-radius: 1rem;
 }
 
 .button {
@@ -41,7 +40,6 @@ main {
 
 .btn {
     font-size: 80%;
-    border-radius: 5rem;
     font-weight: bold;
 }
 
@@ -83,7 +81,6 @@ main {
 .card-auth {
     width: 400px;
     border: 0;
-    border-radius: 1rem;
     box-shadow: 0 0.2rem 0.2rem 0 rgba(0, 0, 0, 0.1);
 }
 
@@ -105,5 +102,4 @@ main {
 }
 
 .form-label-group input {
-    border-radius: 2rem;
 }

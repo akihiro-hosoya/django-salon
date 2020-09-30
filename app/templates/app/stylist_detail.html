@@ -2,21 +2,98 @@
 {% load static %}
 
 {% block content %}
-<div class="row main_wrap">
-    <div class="col-12">
-        <!-- ---------- スタイリスト詳細 ---------- -->
-        <div class="">
-            <h2 class="text-center">スタイリスト</h2>
-            <div class="medium">
-                <div class="media">
-                    <div class="media-body bg-white">
-                        <h5>{{ stylist_data.user.name }}</h5>
+<div class="main_wrap">
+    <div class="row">
+        <!-- タイトル -->
+        <div class="col-12">
+            <h2 class="text-center">STYLIST</h2>
+        </div>
+        <div class="col-12">
+            <!-- ---------- スタイリスト詳細 ---------- -->
+            <div class="row">
+                <!-- スタイリスト画像 -->
+                <div class="col-4">
+                    <div class="">
+                        <img class="img-fluid" style="height: 10rem; width: 10rem;"
+                            src="{{ stylist_data.user.image.url }}" alt="">
+                    </div>
+                </div>
+                <div class="col-8">
+                    <div class="border">
                         <p>{{ stylist_data.user.position }}</p>
-                        <p>{{ stylist_data.user.description|linebreaksbr|truncatechars:100 }}</p>
+                        <h5>{{ stylist_data.user.name }}</h5>
+                        <p>{{ stylist_data.user.description|linebreaksbr|truncatechars:100 }}</p>    
                     </div>
                 </div>
             </div>
         </div>
+        <hr>
+        <div class="col-12">
+            <div class="text-center">
+                <div class="btn btn-dark">
+                    <a href="{% url 'stylist_list' %}" class="d-block">
+                        <span>BACK</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- カレンダー -->
+            <div class="col-12">
+                <div>
+                    <h4>予約カレンダー</h4>
+                    <p>{{ start_day }}〜{{ end_day }}</p>
+                </div>
+                <!-- 週の切り替え -->
+                <div class="d-flex mb-2">
+                    <div class="mx-3 mr-auto">
+                        <a class="btn btn-warning" href="">前週</a>
+                    </div>
+                    <div class="mx-3">
+                        <a class="btn btn-warning" href="">次週</a>
+                    </div>
+                </div>
+                <!-- カレンダー -->
+                <div class="">
+                    <table class="table table-bordered bg-light">
+                        <thead class="thead-light">
+                            <tr>
+                                <th></th>
+                                {% for day in days %}
+                                    <!-- 土曜日 -->
+                                    {% if day.weekday == 5 %}
+                                        <th scope="col" class="text-primary">{{ day | date:"d(D)" }}</th>
+                                    <!-- 日曜日 -->
+                                    {% elif day.weekday == 6 %}
+                                        <th scope="col" class="text-danger">{{ day | date:"d(D)" }}</th>
+                                    {% else %}
+                                        <th scope="col">{{ day | date:"d(D)" }}</th>
+                                    {% endif %}
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for hour, schedules in calendar.items %}
+                                <tr>
+                                    <td scope="row">{{ hour }}:00</td>
+                                    {% for datetime, book in schedules.items %}
+                                        <td>
+                                            {% if datetime <= today %}
+                                                -
+                                            {% elif book %}
+                                                <i class="far fa-circle text-info"></i>
+                                            {% else %}
+                                                <i class="fas fa-times text-danger"></i>
+                                            {% endif %}
+                                        </td>
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
     </div>
 </div>
 {% endblock content %}

@@ -35,18 +35,18 @@
                     <div class="col-12 col-md-5 px-0 border">
                         <div class="">
                             <p>あなたにあったヘアスタイルをご提案します。</p>
-                            <div class="btn btn-outline-secondary">
+                            <a href="{% url 'about' %}" class="btn btn-outline-secondary">
                                 <p>more</p>
-                            </div>
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- News -->
-            <!-- <div class="col-12 mb-5">
+            <div class="col-12 mb-5">
                 <h5 class="text-center">NEWS</h5>
-                <div class="border border-secondary p-5">
+                <div class="border border-secondary p-3">
                     {% for news in news_data %}
                     <ul>
                         <li>
@@ -55,9 +55,11 @@
                             </a>
                         </li>
                     </ul>
+                    {% empty %}
+                    <p>投稿がありません</p>
                     {% endfor %}
                 </div>
-            </div> -->
+            </div>
 
             <!-- スタイリスト -->
             <div class="col-12 mb-5">

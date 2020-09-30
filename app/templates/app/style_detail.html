@@ -3,18 +3,39 @@
 
 {% block content %}
 <div class="row main_wrap">
+    <!-- タイトル -->
     <div class="col-12">
-        <!-- ---------- スタイリスト詳細 ---------- -->
-        <div class="">
-            <h2 class="text-center">スタイリスト</h2>
-            <div class="medium">
-                <div class="media">
-                    <div class="media-body bg-white">
-                        <h5>{{ style_data.name }}</h5>
-                        <p>{{ style_data.detail }}</p>
-                        <p>{{ style_data.stylist.name }}</p>
-                    </div>
+        <h2 class="text-center">STYLE</h2>
+    </div>
+    <div class="col-12">
+        <!-- ---------- スタイル詳細 ---------- -->
+        <div class="row">
+            <!-- スタイリスト画像 -->
+            <div class="col-4">
+                <div class="">
+                    <img class="img-fluid" style="height: 10rem; width: 10rem;"
+                        src="{{ style_data.image.url }}" alt="">
                 </div>
+            </div>
+            <div class="col-8">
+                <div class="border">
+                    <p>Stylist：{{ style_data.stylist.user.name }}</p>
+                    <p>Style：{{ style_data.category }}</p>
+                    <hr>
+                    <p>{{ style_data.name }}</p>
+                    <hr>
+                    <p>{{ style_data.detail|linebreaksbr|truncatechars:100 }}</p>    
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="col-12">
+        <div class="text-center">
+            <div class="btn btn-dark">
+                <a href="{% url 'style_list' %}" class="d-block">
+                    <span>BACK</span>
+                </a>
             </div>
         </div>
     </div>

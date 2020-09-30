@@ -5,20 +5,35 @@
 <div class="row main_wrap">
     <div class="col-12">
         <!-- ---------- スタイリスト一覧 ---------- -->
-        <div class="">
-            <h2 class="text-center">スタイリスト一覧</h2>
-            <div class="medium">
-                {% for stylist in stylist_data %}
-                <div class="media">
-                    <div class="media-body bg-white">
-                        <h5>
-                            <a class="text-info font-weight-bold" href="{% url 'stylist_detail' stylist.id %}">{{ stylist.user.name }}</a>
-                        </h5>
-                        <p>{{ stylist.user.position }}</p>
-                        <p>{{ stylist.user.description|linebreaksbr|truncatechars:100 }}</p>
-                    </div>
+        <div class="row">
+            <!-- タイトル -->
+            <div class="col-12 my-5">
+                <h2 class="text-center">スタイル一覧</h2>
+            </div>
+
+            <!-- 画像 -->
+            <div class="col-12">
+                <div class="d-flex justify-content-center">
+                    <img class="img-fluid" src="/images/blake-wisz-GFrBMipOd_E-unsplash.jpg" alt="">
                 </div>
-                {% endfor %}
+            </div>
+
+            <div class="col-12">
+                <div class="row">
+                    {% for stylist in stylist_data %}
+                    <div class="col-3">
+                        <div class="card">
+                            <img  class="card-img-top img-fluid" style="width: 5rem; height: 5rem;" src="{{ stylist.user.image.url }}" alt="">
+                            <div class="card-body">
+                                <p>{{ stylist.user.position }}</p>
+                                <h5>
+                                    <a class="" href="{% url 'stylist_detail' stylist.id %}">{{ stylist.user.name }}</a>
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </div>

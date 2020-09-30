@@ -5,20 +5,28 @@
 <div class="row main_wrap">
     <div class="col-12">
         <!-- ---------- スタイル一覧 ---------- -->
-        <div class="">
-            <h2 class="text-center">スタイル一覧</h2>
-            <div class="medium">
-                {% for style in style_data %}
-                <div class="media">
-                    <div class="media-body bg-white">
-                        <h5>
-                            <a class="text-info font-weight-bold" href="{% url 'style_detail' style.id %}">{{ style.name }}</a>
-                        </h5>
-                        <p>{{ style.stylist.name }}</p>
-                        <p>{{ style.category.name }}</p>
+        <div class="row">
+            <!-- タイトル -->
+            <div class="col-12 my-5">
+                <h2 class="text-center">スタイル一覧</h2>
+            </div>
+
+            <div class="col-12">
+                <div class="row">
+                    {% for style in style_data %}
+                    <div class="col-3">
+                        <div class="card">
+                            <img  class="card-img-top img-fluid" style="width: 5rem; height: 5rem;" src="{{ style.image.url }}" alt="">
+                            <div class="card-body">
+                                <p>{{ style.category }}</p>
+                                <h5>
+                                    <a class="" href="{% url 'style_detail' style.id %}">{{ style.stylist.user.name }}</a>
+                                </h5>
+                            </div>
+                        </div>
                     </div>
+                    {% endfor %}
                 </div>
-                {% endfor %}
             </div>
         </div>
     </div>

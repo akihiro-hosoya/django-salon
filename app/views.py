@@ -4,12 +4,13 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.timezone import localtime, make_aware
 from datetime import datetime, date, timedelta, time
 from django.db.models import Q
-from app.models import Salon, Stylist, Booking, News, StyleCategory, Style
+from app.models import Salon, Stylist, Booking, News, StyleCategory, Style, MenuCategory, Menu
 from app.forms import BookingForm
 from django.views.decorators.http import require_POST
 
 # Create your views here.
 class IndexView(TemplateView):
+    model = News
     template_name = "app/index.html"
     login_url = '/accounts/login/'
 
@@ -239,7 +240,7 @@ class NewsDetailView(View):
 
 class StylistListView(View):
     def get(self, request, *args, **kwargs):
-        stylist_data = Stylist.objects.order_by('-id')
+        stylist_data = Stylist.objects.order_by('id')
 
         return render(request, 'app/stylist_list.html', {
             'stylist_data': stylist_data,
@@ -248,9 +249,19 @@ class StylistListView(View):
 class StylistDetailView(View):
     def get(self, request, *args, **kwargs):
         stylist_data = Stylist.objects.get(id=self.kwargs['pk'])
+        year = self.kwargs.get('year')
+        month = self.kwargs.get('month')
+        day = self.kwargs.get('day')
+        hour = self.kwargs.get('hour')
+        form = BookingForm(request.POST or None)
 
         return render(request, 'app/stylist_detail.html', {
             'stylist_data': stylist_data,
+            'year': year,
+            'month': month,
+            'day': day,
+            'hour': hour,
+            'form': form,
         })
 
 class StyleListView(View):
@@ -271,10 +282,10 @@ class StyleDetailView(View):
             'style_data': style_data,
         })
 
-# class MenuView(View):
-#     def get(self, request, *args, **kwargs):
-#         menu_data = Menu.objects.order_by('id')
+class MenuView(View):
+    def get(self, request, *args, **kwargs):
+        menu_data = Menu.objects.order_by('id')
 
-#         return render(request, 'app/menu.html', {
-#             'menu': menu,
-#         })
+        return render(request, 'app/menu.html', {
+            'menu_data': menu_data,
+        })
