@@ -18,7 +18,8 @@
         <div class="container">
             <div class="row">
                 <a class="col-8" href="/" class="navbar-bramd">
-                    <span>Design</span>
+                    <h2 class="m-0">Design</h2>
+                    <span>新宿の最先端を走るサロン</span>
                 </a>
                 <div class="col-4">
                     <div class="d-flex justify-content-end mr-3">
@@ -26,7 +27,7 @@
                             <span><i class="fas fa-phone-volume"></i> xxx-xxxx-xxxx</span>
                             <p style="font-size: 0.5rem;">営業時間：10:00〜20:00<br>定休日：火曜日</p>    
                         </div>
-                        <div class="ml-2 d-flex flex-column">
+                        <div class="header-icon">
                             <a href="">
                                 <i class="fab fa-instagram"></i>
                             </a>
@@ -63,14 +64,14 @@
                         <a class="nav-link" href="{% url 'profile' %}">Mypage</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'account_logout' %}">ログアウト</a>
+                        <a class="nav-link nav-link-end" href="{% url 'account_logout' %}">Logout</a>
                     </li>
                     {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'account_signup' %}">サインアップ</a>
+                        <a class="nav-link" href="{% url 'account_signup' %}">Signup</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'account_login' %}">ログイン</a>
+                        <a class="nav-link nav-link-end" href="{% url 'account_login' %}">Login</a>
                     </li>
                     {% endif %}
                 </ul>

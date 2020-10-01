@@ -2,47 +2,40 @@
 {% load static %}
 
 {% block content %}
-<div class="main_wrap">
-    <div class="row">
-        <!-- タイトル -->
-        <div class="col-12">
-            <h2 class="text-center">STYLIST</h2>
-        </div>
-        <div class="col-12">
-            <!-- ---------- スタイリスト詳細 ---------- -->
-            <div class="row">
-                <!-- スタイリスト画像 -->
-                <div class="col-4">
-                    <div class="">
-                        <img class="img-fluid" style="height: 10rem; width: 10rem;"
-                            src="{{ stylist_data.user.image.url }}" alt="">
-                    </div>
-                </div>
-                <div class="col-8">
-                    <div class="border">
-                        <p>{{ stylist_data.user.position }}</p>
-                        <h5>{{ stylist_data.user.name }}</h5>
-                        <p>{{ stylist_data.user.description|linebreaksbr|truncatechars:100 }}</p>    
-                    </div>
-                </div>
+<div class="main-wrap">
+    <div class="container">
+        <div class="row">
+            <!-- スタイリスト詳細 -->
+            <!-- タイトル -->
+            <div class="col-12 my-4">
+                <h2 class="text-center">STYLIST</h2>
             </div>
-        </div>
-        <hr>
-        <div class="col-12">
-            <div class="text-center">
-                <div class="btn btn-dark">
-                    <a href="{% url 'stylist_list' %}" class="d-block">
-                        <span>BACK</span>
-                    </a>
-                </div>
-            </div>
-        </div>
 
-        <!-- カレンダー -->
-            <div class="col-12">
-                <div>
-                    <h4>予約カレンダー</h4>
-                    <p>{{ start_day }}〜{{ end_day }}</p>
+            <div class="col-12 my-4">
+                <!-- ---------- スタイリスト詳細 ---------- -->
+                <div class="row">
+                    <!-- スタイリスト画像 -->
+                    <div class="col-4">
+                        <div class="d-flex justify-content-center">
+                            <img class="img-fluid" style="height: 10rem; width: 10rem;"
+                                src="{{ stylist_data.user.image.url }}" alt="">
+                        </div>
+                    </div>
+                    <div class="col-8">
+                        <div class="border">
+                            <p>{{ stylist_data.user.position }}</p>
+                            <h5>{{ stylist_data.user.name }}</h5>
+                            <p>{{ stylist_data.user.description|linebreaksbr|truncatechars:100 }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+
+            <!-- カレンダー -->
+            <div class="col-12 my-4">
+                <div class="text-center mb-3">
+                    <h4>スタイリストの出勤・予約情報</h4>
                 </div>
                 <!-- 週の切り替え -->
                 <div class="d-flex mb-2">
@@ -60,40 +53,55 @@
                             <tr>
                                 <th></th>
                                 {% for day in days %}
-                                    <!-- 土曜日 -->
-                                    {% if day.weekday == 5 %}
-                                        <th scope="col" class="text-primary">{{ day | date:"d(D)" }}</th>
-                                    <!-- 日曜日 -->
-                                    {% elif day.weekday == 6 %}
-                                        <th scope="col" class="text-danger">{{ day | date:"d(D)" }}</th>
-                                    {% else %}
-                                        <th scope="col">{{ day | date:"d(D)" }}</th>
-                                    {% endif %}
+                                <!-- 土曜日 -->
+                                {% if day.weekday == 5 %}
+                                <th scope="col" class="text-primary">{{ day | date:"d(D)" }}</th>
+                                <!-- 日曜日 -->
+                                {% elif day.weekday == 6 %}
+                                <th scope="col" class="text-danger">{{ day | date:"d(D)" }}</th>
+                                {% else %}
+                                <th scope="col">{{ day | date:"d(D)" }}</th>
+                                {% endif %}
                                 {% endfor %}
                             </tr>
                         </thead>
                         <tbody>
                             {% for hour, schedules in calendar.items %}
-                                <tr>
-                                    <td scope="row">{{ hour }}:00</td>
-                                    {% for datetime, book in schedules.items %}
-                                        <td>
-                                            {% if datetime <= today %}
-                                                -
-                                            {% elif book %}
-                                                <i class="far fa-circle text-info"></i>
-                                            {% else %}
-                                                <i class="fas fa-times text-danger"></i>
-                                            {% endif %}
-                                        </td>
-                                    {% endfor %}
-                                </tr>
+                            <tr>
+                                <td scope="row">{{ hour }}:00</td>
+                                {% for datetime, book in schedules.items %}
+                                <td>
+                                    {% if datetime <= today %}
+                                    -
+                                    {% elif book %}
+                                    <i class="far fa-circle text-info"></i>
+                                    {% else %}
+                                    <i class="fas fa-times text-danger"></i>
+                                    {% endif %}
+                                </td>
+                                {% endfor %}
+                            </tr>
                             {% endfor %}
                         </tbody>
                     </table>
                 </div>
             </div>
 
+            <div class="col-12">
+                <div class="text-center">
+                    <div class="btn btn-dark">
+                        <a href="{% url 'stylist_list' %}" class="d-block">
+                            <span class="text-white">BACK</span>
+                        </a>
+                    </div>
+                    <div class="btn btn-outline-dark">
+                        <a href="{% url 'salon_choice' %}" class="d-block">
+                            <span>RESERVE</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
-</div>
-{% endblock content %}
+    {% endblock content %}

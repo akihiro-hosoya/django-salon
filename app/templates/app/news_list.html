@@ -2,24 +2,36 @@
 {% load static %}
 
 {% block content %}
-<div class="row main_wrap">
-    <div class="col-12">
-        <!-- ---------- 最新情報一覧 ---------- -->
-        <div class="">
-            <h2 class="text-center">NEWS一覧</h2>
-            <div class="medium">
-                {% for news in news_data %}
-                <div class="media">
-                    <div class="media-body bg-white">
-                        <h5><a class="text-info font-weight-bold"
-                                href="{% url 'news_detail' news.id %}">{{ news.title }}</a></h5>
-                        <p>{{ news.content|linebreaksbr|truncatechars:100 }}</p>
-                        <div class="media-detail">
-                            <p>{{ news.created_date }}</p>
+<div class="main_wrap">
+    <div class="container">
+        <div class="row">
+            <!-- News一覧 -->
+            <!-- タイトル -->
+            <div class="col-12 my-4">
+                <h2 class="text-center">NEWS</h2>
+                <!-- 画像 -->
+                <div class="">
+                    <img class="img-fluid page-top-img" src="/images/blake-wisz-GFrBMipOd_E-unsplash.jpg" alt="">
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="row d-flex justify-content-around">
+                    {% for news in news_data %}
+                    <div class="card col-5 m-2">
+                        {% if news.image %}
+                        <img src="{{ news.image }}" alt="">
+                        {% endif %}
+                        <div class="card-body p-3">
+                            <h5 class="card-title"><a class="font-weight-bold"
+                                    href="{% url 'news_detail' news.id %}">{{ news.title }}</a></h5>
+                            <p>{{ news.content|linebreaksbr|truncatechars:50 }}</p>
+                            <div class="card-detail">
+                                <p>{{ news.created_date }}</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                {% endfor %}
+                    {% endfor %}
+                </div>    
             </div>
         </div>
     </div>

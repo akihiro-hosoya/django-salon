@@ -2,19 +2,16 @@
 {% load static %}
 
 {% block content %}
-<div class="row main_wrap">
-    <div class="col-12">
-        <!-- ---------- スタイリスト一覧 ---------- -->
+<div class="main-wrap">
+    <div class="container">
         <div class="row">
+            <!-- STYLISTS -->
             <!-- タイトル -->
-            <div class="col-12 my-5">
-                <h2 class="text-center">スタイル一覧</h2>
-            </div>
-
+            <div class="col-12 my-4">
+                <h2 class="text-center">STYLISTS</h2>
             <!-- 画像 -->
-            <div class="col-12">
-                <div class="d-flex justify-content-center">
-                    <img class="img-fluid" src="/images/blake-wisz-GFrBMipOd_E-unsplash.jpg" alt="">
+                <div class="">
+                    <img class="img-fluid page-top-img" src="/images/blake-wisz-GFrBMipOd_E-unsplash.jpg" alt="">
                 </div>
             </div>
 
@@ -23,13 +20,14 @@
                     {% for stylist in stylist_data %}
                     <div class="col-3">
                         <div class="card">
-                            <img  class="card-img-top img-fluid" style="width: 5rem; height: 5rem;" src="{{ stylist.user.image.url }}" alt="">
+                            {% if stylist.user.image %}
+                                <img  class="card-img-top img-fluid" src="{{ stylist.image.url }}" alt="">
+                            {% endif %}
                             <div class="card-body">
                                 <p>{{ stylist.user.position }}</p>
-                                <h5>
-                                    <a class="" href="{% url 'stylist_detail' stylist.id %}">{{ stylist.user.name }}</a>
-                                </h5>
+                                <h5>{{ stylist.user.name }}</h5>
                             </div>
+                            <a class="stretched-link" href="{% url 'stylist_detail' stylist.pk  %}"></a>
                         </div>
                     </div>
                     {% endfor %}

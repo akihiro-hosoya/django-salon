@@ -10,9 +10,14 @@ from django.views.decorators.http import require_POST
 
 # Create your views here.
 class IndexView(TemplateView):
-    model = News
-    template_name = "app/index.html"
-    login_url = '/accounts/login/'
+    def get(self, request, *args, **kwargs):
+        news_data = News.objects.order_by('-id')[0:3]
+        stylist_data = Stylist.objects.order_by('id')
+
+        return render(request, 'app/index.html', {
+            'news_data': news_data,
+            'stylist_data': stylist_data,
+        })
 
 class SalonChoiceView(ListView):
     def get(self, request, *args, **kwargs):

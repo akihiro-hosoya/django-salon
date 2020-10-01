@@ -2,19 +2,33 @@
 {% load static %}
 
 {% block content %}
-    <div class="row main_wrap">
-        <div class="col-12">
-            <!-- ----- News ----- -->
-            <h3 class="text-center">{{ news_data.title }}</h3>
-            <hr>
-            <div class="media">
-                <div class="media-body">
-                    <p class="">{{ news_data.content|linebreaksbr }}</p>
+<div class="main-wrap">
+    <div class="container">
+        <div class="row">
+            <!-- NEWS詳細 -->
+            <!-- タイトル -->
+            <div class="col-12 my-4">
+                <h2 class="text-center">NEWS</h2>
+                <!-- 画像 -->
+                <div class="">
+                    <img class="img-fluid page-top-img" src="/images/blake-wisz-GFrBMipOd_E-unsplash.jpg" alt="">
                 </div>
-                <div class="media-detail">
+                <!-- 詳細 -->
+                <h3 class="text-center my-4">{{ news_data.title }}</h3>
+                <div class="text-right">
                     <p>投稿日時：{{ news_data.created_date }}</p>
+                </div>
+                <hr>
+                {% if news_data.image %}
+                    <img src="{{ news_data.image.url }}" alt="">
+                {% endif %}
+                <div class="">
+                    <div class="">
+                        <p class="">{{ news_data.content|linebreaksbr }}</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-{% endblock content %}
+</div>
+{% endblock %}
