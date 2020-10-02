@@ -1,0 +1,59 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="main-wrap">
+    <div class="container">
+        <div class="row">
+            <!-- 商品詳細 -->
+            <!-- タイトル -->
+            <div class="col-12 my-4">
+                <h2 class="text-center">ITEM</h2>
+            </div>
+
+            <div class="col-12 my-2">
+                <!-- ---------- 商品詳細 ---------- -->
+                <div class="row">
+                    <!-- 商品画像 -->
+                    <div class="col-4">
+                        <div class="">
+                            {% if item.image %}
+                            <img class="img-fluid" style="height: 10rem; width: 10rem;" src="{{ item.image.url }}"
+                                alt="">
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-8">
+                        <div class="border p-3">
+                            <p>商品名：{{ item.title }}</p>
+                            <hr>
+                            <p>価格：{{ item.price }}（税込）</p>
+                            <hr>
+                            <h6>商品説明</h6>
+                            <p>{{ item.description|linebreaksbr|truncatechars:100 }}</p>
+                            <div class="text-center">
+                                <div class="btn btn-outline-info">
+                                    <a href="{% url 'item_list' %}" class="d-block">
+                                        <span class="text-info">カートに入れる</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <br>
+            <div class="col-12">
+                <div class="text-center">
+                    <div class="btn btn-dark">
+                        <a href="{% url 'item_list' %}" class="d-block">
+                            <span class="text-white">BACK</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

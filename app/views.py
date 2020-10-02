@@ -254,6 +254,9 @@ class StylistListView(View):
 class StylistDetailView(View):
     def get(self, request, *args, **kwargs):
         stylist_data = Stylist.objects.get(id=self.kwargs['pk'])
+        print(stylist_data.user.image.url)
+        
+
         today = date.today()
         year = self.kwargs.get('year')
         month = self.kwargs.get('month')
