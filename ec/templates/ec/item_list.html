@@ -1,0 +1,47 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="main-wrap">
+    <div class="container">
+        <div class="row">
+            <!-- 商品リスト -->
+            <!-- タイトル -->
+            <div class="col-12 my-4">
+                <h2 class="text-center">SHOP</h2>
+            </div>
+
+            <!-- カテゴリ -->
+            <div class="col-12 my-2">
+                <div class="d-flex justify-content-evenly">
+                    {% for category in style_category %}
+                        <div>
+                            <a href="">
+                                <p>{{ category.name }}</p>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- 一覧 -->
+            <div class="col-12">
+                <div class="row">
+                    {% for item in object_list %}
+                    <div class="col-4">
+                        <div class="card">
+                            <img  class="card-img-top img-fluid" style="width: 5rem; height: 5rem;" src="{{ item.image.url }}" alt="">
+                            <div class="card-body">
+                                <h5>{{ item.title }}</h5>
+                                <h4>{{ item.price }}円</h4>
+                            </div>
+                            <a class="stretched-link" href=""></a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
