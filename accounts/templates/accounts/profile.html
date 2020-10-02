@@ -1,50 +1,58 @@
 {% extends "app/base.html" %}
 
 {% block content %}
+<div class="main-wrap">
+    <div class="container">
+        <div class="row">
+            <!-- Profile -->
+            <!-- タイトル -->
+            <div class="col-12 my-4">
+                <h2 class="text-center">PROFILE</h2>
+            </div>
 
-<div class="card card-profile my-5 mx-auto">
-    <div class="card-body">
-        <h5 class="card-title text-center">プロフィール</h5>
-        <table class="profile_table mb-4">
-            <tbody>
-                <tr>
-                    <th class="header">プロフィール画像</th>
-                    <td class="data">
-                        {% if user_data.image %}
-                            <img src="/{{ user_data.image.url }}" width=100px alt="">
-                        {% endif %}
-                    </td>
-                </tr>
-                <tr>
-                    <th class="header">名前</th>
-                    <td class="data">{{ user_data.name }}</td>
-                </tr>
-                <tr>
-                    <th class="header">フリガナ</th>
-                    <td class="data">{{ user_data.furigana }}</td>
-                </tr>
-                <tr>
-                    <th class="header">メールアドレス</th>
-                    <td class="data">{{ user_data.email }}</td>
-                </tr>
-                <tr>
-                    <th class="header">役職</th>
-                    <td class="data">{{ user_data.position }}</td>
-                </tr>
-                <tr>
-                    <th class="header">自己紹介</th>
-                    <td class="data">{{ user_data.description }}</td>
-                </tr>
-                <tr>
-                    <th class="header"> 勤務開始日</th>
-                    <td class="data">{{ user_data.created }}</td>
-                </tr>
-            </tbody>
-        </table>
-        <div class="button mx-auto">
-            <a class="btn btn-lg btn-warning btn-block" href="{% url 'profile_edit' %}">編集する</a>
+            <!-- プロフィール欄 -->
+            <div class="col-12">
+                <table class="profile_table mb-4 p-0">
+                    <tbody>
+                        <tr>
+                            <th class="header">プロフィール画像</th>
+                            <td class="data">
+                                {% if user_data.image %}
+                                <img src="/{{ user_data.image.url }}" width=100px alt="">
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="header">名前</th>
+                            <td class="data">{{ user_data.name }}</td>
+                        </tr>
+                        <tr>
+                            <th class="header">フリガナ</th>
+                            <td class="data">{{ user_data.furigana }}</td>
+                        </tr>
+                        <tr>
+                            <th class="header">メールアドレス</th>
+                            <td class="data">{{ user_data.email }}</td>
+                        </tr>
+                        <tr>
+                            <th class="header">役職</th>
+                            <td class="data">{{ user_data.position }}</td>
+                        </tr>
+                        <tr>
+                            <th class="header">自己紹介</th>
+                            <td class="data">{{ user_data.description }}</td>
+                        </tr>
+                        <tr>
+                            <th class="header"> 勤務開始日</th>
+                            <td class="data">{{ user_data.created }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="button mx-auto">
+                <a class="btn btn-lg btn-warning btn-block" href="{% url 'profile_edit' %}">編集する</a>
+            </div>
         </div>
     </div>
 </div>
-
 {% endblock %}

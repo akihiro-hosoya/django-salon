@@ -2,40 +2,53 @@
 {% load static %}
 
 {% block content %}
-<div class="row main_wrap">
-    <!-- タイトル -->
-    <div class="col-12">
-        <h2 class="text-center">STYLE</h2>
-    </div>
-    <div class="col-12">
-        <!-- ---------- スタイル詳細 ---------- -->
+<div class="main-wrap">
+    <div class="container">
         <div class="row">
-            <!-- スタイリスト画像 -->
-            <div class="col-4">
-                <div class="">
-                    <img class="img-fluid" style="height: 10rem; width: 10rem;"
-                        src="{{ style_data.image.url }}" alt="">
+            <!-- スタイル詳細 -->
+            <!-- タイトル -->
+            <div class="col-12 my-4">
+                <h2 class="text-center">STYLE</h2>
+            </div>
+
+            <div class="col-12 my-4">
+                <!-- ---------- スタイル詳細 ---------- -->
+                <div class="row">
+                    <!-- スタイリスト画像 -->
+                    <div class="col-4">
+                        <div class="">
+                            {% if style_data.image %}
+                            <img class="img-fluid" style="height: 10rem; width: 10rem;" src="{{ style_data.image.url }}"
+                                alt="">
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-8">
+                        <div class="border p-3">
+                            <p>Stylist：{{ style_data.stylist.user.name }}<br>
+                                Style：{{ style_data.category }}</p>
+                            <hr>
+                            <p>{{ style_data.name }}</p>
+                            <hr>
+                            <p>{{ style_data.detail|linebreaksbr|truncatechars:100 }}</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-8">
-                <div class="border">
-                    <p>Stylist：{{ style_data.stylist.user.name }}</p>
-                    <p>Style：{{ style_data.category }}</p>
-                    <hr>
-                    <p>{{ style_data.name }}</p>
-                    <hr>
-                    <p>{{ style_data.detail|linebreaksbr|truncatechars:100 }}</p>    
+            <hr>
+            <div class="col-12">
+                <div class="text-center">
+                    <div class="btn btn-dark">
+                        <a href="{% url 'style_list' %}" class="d-block">
+                            <span class="text-white">BACK</span>
+                        </a>
+                    </div>
+                    <div class="btn btn-outline-dark">
+                        <a href="{% url 'salon_choice' %}" class="d-block">
+                            <span>RESERVE</span>
+                        </a>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <hr>
-    <div class="col-12">
-        <div class="text-center">
-            <div class="btn btn-dark">
-                <a href="{% url 'style_list' %}" class="d-block">
-                    <span>BACK</span>
-                </a>
             </div>
         </div>
     </div>

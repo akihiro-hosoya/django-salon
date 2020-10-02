@@ -98,16 +98,19 @@ ol, ul {
 
 .profile_table {
     width: 100%;
-    border: 1px solid #D1DBEB;
+    border: 1px solid #000;
     border-collapse: separate;
     overflow: hidden;
+    max-width: 700px;
+    margin: 0 auto;
 }
 
 .profile_table .header {
     width: 200px;
     padding: 16px 24px;
     text-align: left;
-    background: #F1F5FA;
+    background: #000;
+    color: #fff;
 }
 
 .profile_table .data {

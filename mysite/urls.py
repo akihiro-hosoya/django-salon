@@ -24,6 +24,7 @@ urlpatterns = [
     path('', include('app.urls')),
     path('accounts/', include('accounts.urls')),
     path('accounts/', include('allauth.urls')),
+    path('ec/', include('ec.urls')),
 ]
 
 urlpatterns += static(settings.IMAGE_URL, document_root=settings.IMAGE_ROOT)

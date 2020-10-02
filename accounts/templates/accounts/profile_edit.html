@@ -2,45 +2,51 @@
 {% load widget_tweaks %}
 
 {% block content %}
-
-<div class="card card-profile my-5 mx-auto">
-    <div class="card-body">
-        <h5 class="card-title text-center">プロフィール</h5>
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <table class="profile_table mb-4">
-                <tbody>
-                    <tr>
-                        <th class="header">プロフィール画像</th>
-                        <td class="data">
-                            {{ form.image }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th class="header">名前</th>
-                        <td class="data">
-                            {% render_field form.name class="form-control" placeholder="名前" %}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th class="header">フリガナ</th>
-                        <td class="data">
-                            {% render_field form.furigana class="form-control" placeholder="フリガナ" %}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th class="header">自己紹介</th>
-                        <td class="data">
-                            {% render_field form.description class="form-control" placeholder="自己紹介" %}
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="button mx-auto">
-                <button class="btn btn-lg btn-warning btn-block" type="submit">登録する</button>
+<div class="main-wrap">
+    <div class="container">
+        <div class="row">
+            <!-- Profile編集 -->
+            <!-- タイトル -->
+            <div class="col-12 my-4">
+                <h2 class="text-center">EDIT_PROFILE</h2>
             </div>
-        </form>
+
+            <!-- 編集フォーム -->
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <table class="profile_table mb-4">
+                    <tbody>
+                        <tr>
+                            <th class="header">プロフィール画像</th>
+                            <td class="data">
+                                {{ form.image }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="header">名前</th>
+                            <td class="data">
+                                {% render_field form.name class="form-control" placeholder="名前" %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="header">フリガナ</th>
+                            <td class="data">
+                                {% render_field form.furigana class="form-control" placeholder="フリガナ" %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="header">自己紹介</th>
+                            <td class="data">
+                                {% render_field form.description class="form-control" placeholder="自己紹介" %}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="button mx-auto">
+                    <button class="btn btn-lg btn-warning btn-block" type="submit">登録する</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
-
 {% endblock %}

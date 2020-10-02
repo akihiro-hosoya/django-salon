@@ -254,19 +254,49 @@ class StylistListView(View):
 class StylistDetailView(View):
     def get(self, request, *args, **kwargs):
         stylist_data = Stylist.objects.get(id=self.kwargs['pk'])
+        today = date.today()
         year = self.kwargs.get('year')
         month = self.kwargs.get('month')
         day = self.kwargs.get('day')
-        hour = self.kwargs.get('hour')
-        form = BookingForm(request.POST or None)
+        if year and month and day:
+            # 週始め
+            start_date = date(year=year, month=month, day=day)
+        else:
+            start_date = today
+        # 1週間
+        days = [start_date]
+        days = [start_date + timedelta(days=day) for day in range(7)]
+        start_day = days[0]
+        end_day = days[-1]
 
+        calendar = {}
+        # 10時～20時
+        for hour in range(10, 21):
+            row = {}
+            for day in days:
+                row[day] = True
+            calendar[hour] = row
+        start_time = make_aware(datetime.combine(start_day, time(hour=10, minute=0, second=0)))
+        end_time = make_aware(datetime.combine(end_day, time(hour=20, minute=0, second=0)))
+        # 開始時間＜終了時間・終了時間＞開始時間
+        booking_data = Booking.objects.filter(stylist=stylist_data).exclude(Q(start__gt=end_time) | Q(end__lt=start_time))
+        for booking in booking_data:
+            # 現地のタイムゾーンに変更
+            local_time = localtime(booking.start)
+            booking_date = local_time.date()
+            booking_hour = local_time.hour
+            if (booking_hour in calendar) and (booking_date in calendar[booking_hour]):
+                calendar[booking_hour][booking_date] = False
+        
         return render(request, 'app/stylist_detail.html', {
             'stylist_data': stylist_data,
-            'year': year,
-            'month': month,
-            'day': day,
-            'hour': hour,
-            'form': form,
+            'calendar': calendar,
+            'days': days,
+            'start_day': start_day,
+            'end_day': end_day,
+            'before': days[0] - timedelta(days=7),
+            'next': days[-1] + timedelta(days=1),
+            'today': today,
         })
 
 class StyleListView(View):
