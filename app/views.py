@@ -322,8 +322,10 @@ class StyleDetailView(View):
 
 class MenuView(View):
     def get(self, request, *args, **kwargs):
+        menu_category = MenuCategory.objects.order_by('id')
         menu_data = Menu.objects.order_by('id')
 
         return render(request, 'app/menu.html', {
             'menu_data': menu_data,
+            'menu_category': menu_category,
         })

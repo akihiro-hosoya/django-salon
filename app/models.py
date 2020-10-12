@@ -16,7 +16,7 @@ class Salon(models.Model):
         return self.name
 
 class Stylist(models.Model):
-    user = models.OneToOneField(CustomUser, verbose_name='スタイリスト', on_delete=models.CASCADE)
+    stylist = models.OneToOneField(, verbose_name='スタイリスト', on_delete=models.CASCADE)
     salon = models.ForeignKey(Salon, verbose_name='店舗', on_delete=models.CASCADE)
 
     def __str__(self):
@@ -81,3 +81,17 @@ class Menu(models.Model):
 
     def __str__(self):
         return self.title
+
+class User(models.Model):
+    account_core = models.OneToOneField(CustomUser, verbose_name='アカウント', on_delete=models.CASCADE)
+    address = models.CharField('住所', max_length=100, null=True, blank=True)
+
+    def __str__(self):
+        return self.account_core.first_name
+
+class Staff(models.Model):
+    account_core = models.OneToOneField(CustomUser, verbose_name='アカウント', on_delete=models.CASCADE)
+    tel = models.CharField('電話番号', max_length=100, null=True, blank=True)
+
+    def __str__(self):
+        return self.account_core.first_name

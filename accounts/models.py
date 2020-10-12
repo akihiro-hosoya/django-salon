@@ -28,15 +28,21 @@ class UserManager(UserManager):
 
         return self._create_user(email, password, **extra_fields)
 
+ACCOUNT_TYPE_CHOICES = (
+    (1, 'ユーザー'),
+    (2, 'スタッフ')
+)
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField('メールアドレス', unique=True)
-    name = models.CharField(('名前'), max_length=30)
-    furigana = models.CharField(('フリガナ'), max_length=30)
-    position = models.CharField(('役職'), max_length=30, blank=True)
-    description = models.TextField('自己紹介', default="", blank=True)
-    image = models.ImageField(upload_to='images', verbose_name='プロフィール画像', null=True, blank=True)
-    created = models.DateTimeField(('勤務開始日'), default=timezone.now)
+    first_name = models.CharField('姓', max_length=100)
+    last_name = models.CharField('名', max_length=100)
+    account_type = models.IntegerField('アカウントの種類', choices=ACCOUNT_TYPE_CHOICES, default=1)
+    # furigana = models.CharField(('フリガナ'), max_length=30)
+    # position = models.CharField(('役職'), max_length=30, blank=True)
+    # description = models.TextField('自己紹介', default="", blank=True)
+    # image = models.ImageField(upload_to='images', verbose_name='プロフィール画像', null=True, blank=True)
+    # created = models.DateTimeField(('勤務開始日'), default=timezone.now)
 
     is_staff = models.BooleanField(
         ('staff status'),

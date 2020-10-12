@@ -33,9 +33,7 @@
                             <p>{{ item.description|linebreaksbr|truncatechars:100 }}</p>
                             <div class="text-center">
                                 <div class="btn btn-outline-info">
-                                    <a href="{% url 'item_list' %}" class="d-block">
-                                        <span class="text-info">カートに入れる</span>
-                                    </a>
+                                    <a class="btn btn-primary" href="{% url 'additem' object.slug %}">カートに入れる</a>
                                 </div>
                             </div>
                         </div>

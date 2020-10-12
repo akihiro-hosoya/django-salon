@@ -48,7 +48,7 @@
                         <a class="nav-link" href="{% url 'news_list' %}">News</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/">Menu</a>
+                        <a class="nav-link" href="{% url 'menu' %}">Menu</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'stylist_list' %}">Stylist</a>
@@ -65,6 +65,9 @@
                     {% if user.is_authenticated %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'profile' %}">Mypage</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'order' %}">Cart</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link nav-link-end" href="{% url 'account_logout' %}">Logout</a>
